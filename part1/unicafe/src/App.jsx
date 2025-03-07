@@ -91,6 +91,12 @@ function App() {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const resetStats = () => {
+    setGood(0)
+    setNeutral(0)
+    setBad(0)
+  }
+
   return (
     <div style={{
       maxWidth: '600px',
@@ -104,6 +110,23 @@ function App() {
         <Button name="neutral" action={setNeutral} />
         <Button name="bad" action={setBad} />
       </div>
+
+      <button
+        onClick={resetStats}
+        style={{
+          padding: '0.5rem 1rem',
+          marginBottom: '1rem',
+          backgroundColor: '#e74c3c',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: 'pointer'
+        }}
+        onMouseOver={(e) => e.target.style.backgroundColor = '#c0392b'}
+        onMouseOut={(e) => e.target.style.backgroundColor = '#e74c3c'}
+      >
+        reset
+      </button>
 
       <Header title="statistics" />
       <Statistics stats={{ good, neutral, bad }} />
