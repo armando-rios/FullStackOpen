@@ -39,15 +39,15 @@ function Button({ name, action }) {
 
 function Statistics({ stats }) {
   const { good, neutral, bad } = stats
-  const total = good + neutral + bad
+  const all = good + neutral + bad
 
   // Si no hay feedback, mostrar mensaje alternativo
-  if (total === 0) {
+  if (all === 0) {
     return <p style={{ color: '#7f8c8d', fontStyle: 'italic', margin: '1rem 0' }}>No feedback given yet</p>
   }
 
-  const average = ((good * 1) + (neutral * 0) + (bad * -1)) / total
-  const positivePercentage = (good / total) * 100
+  const average = ((good * 1) + (neutral * 0) + (bad * -1)) / all
+  const positivePercentage = (good / all) * 100
 
   return (
     <table style={{
@@ -69,9 +69,9 @@ function Statistics({ stats }) {
           <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>bad</td>
           <td style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'right' }}>{bad}</td>
         </tr>
-        <tr style={{ backgroundColor: '#f2f2f2' }}>
-          <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>total</td>
-          <td style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'right' }}>{total}</td>
+        <tr style={{ backgroundColor: '#3f3f3' }}>
+          <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>all</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'right' }}>{all}</td>
         </tr>
         <tr>
           <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>average</td>
