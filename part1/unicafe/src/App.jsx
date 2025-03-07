@@ -2,7 +2,14 @@ import { useState } from "react"
 
 function Header({ title }) {
   return (
-    <h1>{title}</h1>
+    <h1 style={{
+      fontSize: '1.5rem',
+      fontWeight: 'bold',
+      margin: '1rem 0',
+      textTransform: 'capitalize'
+    }}>
+      {title}
+    </h1>
   )
 }
 
@@ -13,6 +20,17 @@ function Button({ name, action }) {
   return (
     <button
       onClick={handleButton}
+      style={{
+        padding: '0.5rem 1rem',
+        margin: '0 0.5rem 0.5rem 0',
+        backgroundColor: '#3498db',
+        color: 'white',
+        border: 'none',
+        borderRadius: '4px',
+        cursor: 'pointer'
+      }}
+      onMouseOver={(e) => e.target.style.backgroundColor = '#2980b9'}
+      onMouseOut={(e) => e.target.style.backgroundColor = '#3498db'}
     >
       {name}
     </button>
@@ -21,42 +39,47 @@ function Button({ name, action }) {
 
 function Statistics({ stats }) {
   const { good, neutral, bad } = stats
-  const all = good + neutral + bad
+  const total = good + neutral + bad
 
   // Si no hay feedback, mostrar mensaje alternativo
-  if (all === 0) {
-    return <p>No feedback given yet</p>
+  if (total === 0) {
+    return <p style={{ color: '#7f8c8d', fontStyle: 'italic', margin: '1rem 0' }}>No feedback given yet</p>
   }
 
-  const average = ((good * 1) + (neutral * 0) + (bad * -1)) / all
-  const positivePercentage = (good / all) * 100
+  const average = ((good * 1) + (neutral * 0) + (bad * -1)) / total
+  const positivePercentage = (good / total) * 100
 
   return (
-    <table>
+    <table style={{
+      width: '100%',
+      borderCollapse: 'collapse',
+      marginTop: '1rem',
+      border: '1px solid #ddd'
+    }}>
       <tbody>
         <tr>
-          <td>good</td>
-          <td>{good}</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>good</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'right' }}>{good}</td>
         </tr>
         <tr>
-          <td>neutral</td>
-          <td>{neutral}</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>neutral</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'right' }}>{neutral}</td>
         </tr>
         <tr>
-          <td>bad</td>
-          <td>{bad}</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>bad</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'right' }}>{bad}</td>
+        </tr>
+        <tr style={{ backgroundColor: '#f2f2f2' }}>
+          <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>total</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'right' }}>{total}</td>
         </tr>
         <tr>
-          <td>all</td>
-          <td>{all}</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>average</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'right' }}>{average.toFixed(2)}</td>
         </tr>
         <tr>
-          <td>average</td>
-          <td>{average.toFixed(2)}</td>
-        </tr>
-        <tr>
-          <td>positive</td>
-          <td>{positivePercentage.toFixed(1)}%</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', fontWeight: 'bold' }}>positive</td>
+          <td style={{ padding: '8px', border: '1px solid #ddd', textAlign: 'right' }}>{positivePercentage.toFixed(1)}%</td>
         </tr>
       </tbody>
     </table>
@@ -69,9 +92,14 @@ function App() {
   const [bad, setBad] = useState(0)
 
   return (
-    <div>
+    <div style={{
+      maxWidth: '600px',
+      margin: '0 auto',
+      padding: '20px',
+      fontFamily: 'Arial, sans-serif'
+    }}>
       <Header title="give feedback" />
-      <div>
+      <div style={{ marginBottom: '1rem' }}>
         <Button name="good" action={setGood} />
         <Button name="neutral" action={setNeutral} />
         <Button name="bad" action={setBad} />
